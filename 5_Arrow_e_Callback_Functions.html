@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>   
+<head>
+    <meta charset="UTF-8">      
+    <title>Comidas Típicas de Caicó</title>
+</head>
+
+<body>
+    <div id="controles">
+        <a href="#" id="linkCarregar">Carregar Comidas</a> |
+        <a href="#" id="linkOrdenar">Mostrar Comidas Ordenadas</a> |
+        <a href="#" id="linkEmbaralhar">Embaralhar Comidas</a>
+    </div>
+
+    <div id="conteudoComidas">
+    </div>
+   
+    <script>
+        let comidasTipicas = [
+            "Carne de Sol com Macaxeira", 
+            "Bolo de Rolo", 
+            "Paçoca de Carne", 
+            "Queijo de Manteiga", 
+            "Doce de Leite", 
+            "Canjica"
+        ];
+        
+        let comidasAtuais = [...comidasTipicas]; 
+
+        const criarTabelaComidas = (arrayDeComidas) => {
+            let tabelaHtml = '<table><thead><tr><th>Nome da Comida</th></tr></thead><tbody>';
+            arrayDeComidas.forEach(item => {
+                tabelaHtml += `<tr><td>${item}</td></tr>`;
+            });
+            tabelaHtml += '</tbody></table>';
+            return tabelaHtml;
+        };
+
+        const carregarComidas = (cervs) => {
+            const divConteudo = document.getElementById("conteudoComidas");
+            divConteudo.innerHTML = criarTabelaComidas(cervs);
+        };
+        
+        const linkCarregar = document.getElementById("linkCarregar");
+        const linkOrdenar = document.getElementById("linkOrdenar");
+        const linkEmbaralhar = document.getElementById("linkEmbaralhar");
+
+        linkCarregar.addEventListener("click", (event) => {
+            event.preventDefault();
+            comidasAtuais = [...comidasTipicas];
+            carregarComidas(comidasAtuais);
+        });
+
+        linkOrdenar.addEventListener("click", (event) => {
+            event.preventDefault(); 
+            comidasAtuais.sort(); 
+            carregarComidas(comidasAtuais);
+        });
+
+        linkEmbaralhar.addEventListener("click", (event) => {
+            event.preventDefault();
+            for (let i = comidasAtuais.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [comidasAtuais[i], comidasAtuais[j]] = [comidasAtuais[j], comidasAtuais[i]];
+            }
+            carregarComidas(comidasAtuais);
+        });
+    </script>
+</body>   
+</html>

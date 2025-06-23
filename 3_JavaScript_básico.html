@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cervejas Simples</title>
+</head>
+<body>
+    <div id="containerBotao">
+        <button id="botaoAcao">Mostrar/Esconder Cerveja</button>
+    </div>
+
+    <div id="containerCerveja">
+        </div>
+
+    <script>
+        const botao = document.getElementById("botaoAcao");
+        const containerCerveja = document.getElementById("containerCerveja");
+        let cervejaVisivel = false;
+
+        botao.addEventListener("click", () => {
+            if (cervejaVisivel) {
+                containerCerveja.innerHTML = '';
+                cervejaVisivel = false;
+            } else {
+                containerCerveja.innerHTML = '<h1>Guinness</h1>';
+                cervejaVisivel = true;
+            }
+        });
+    </script>
+</body>
+</html>

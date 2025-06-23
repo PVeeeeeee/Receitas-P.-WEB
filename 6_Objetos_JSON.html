@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>   
+<head>
+    <meta charset="UTF-8">      
+    <title>Minhas Cervejas Detalhadas</title>
+    <link href="estilo6.css" rel="stylesheet">
+</head>
+
+<body>
+    <div>
+        <button id="botaoCarregar">Carregar Cervejas Detalhadas</button>
+    </div>
+    <div id="minhaTabelaDeCervejas">
+    </div>            
+</body>   
+   
+<script>
+    let cervejas = [
+        {
+            name: "Guinness Draught", 
+            alcohol: "4.2%",            
+            style: "Irish Dry Stout",
+            ibu: "45"
+        }, 
+        {
+            name: "Desperados Original",
+            alcohol: "5.9%",             
+            style: "Lager com Tequila",
+            ibu: "10" 
+        }, 
+        {
+            name: "Beck's German Pils",
+            alcohol: "5.0%",             
+            style: "German Pilsner",
+            ibu: "20"
+        },
+        {
+            name: "Sierra Nevada Pale Ale",
+            alcohol: "5.6%",
+            style: "American Pale Ale",
+            ibu: "38"
+        },
+        {
+            name: "Chimay Blue (Grande Réserve)",
+            alcohol: "9.0%",
+            style: "Belgian Dark Strong Ale",
+            ibu: "35"
+        }
+    ];
+    
+    const carregarTabelaDeCervejas = (
+        cs, 
+        targetId = "minhaTabelaDeCervejas", 
+        headers = ["Nome", "Álcool", "Estilo", "Amargor"],
+        properties = ["name", "alcohol", "style", "ibu"]
+    ) => {
+        const targetDiv = document.getElementById(targetId);
+        if (!targetDiv) {
+            console.error(`Elemento com ID '${targetId}' não encontrado.`);
+            return;
+        }
+
+        let tableHtml = '<table><thead><tr>';
+        headers.forEach(header => {
+            tableHtml += `<th>${header}</th>`;
+        });
+        tableHtml += '</tr></thead><tbody>';
+
+        cs.forEach(cerveja => {
+            tableHtml += '<tr>';
+            properties.forEach(prop => {
+                tableHtml += `<td>${cerveja[prop] !== undefined ? cerveja[prop] : ''}</td>`;
+            });
+            tableHtml += '</tr>';
+        });
+
+        tableHtml += '</tbody></table>';
+        targetDiv.innerHTML = tableHtml;
+    };
+
+    let botao = document.getElementById("botaoCarregar");
+    botao.addEventListener("click", () => carregarTabelaDeCervejas(cervejas));                 
+</script>
+</html>

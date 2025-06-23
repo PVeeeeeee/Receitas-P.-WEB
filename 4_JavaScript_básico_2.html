@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>   
+<head>
+    <meta charset="UTF-8">      
+    <title>Minhas Cervejas</title>
+</head>
+
+<body>
+    <div id="controles">
+        <button id="botaoCarregar">Carregar Cervejas</button>
+        <button id="botaoOrdenar">Mostrar Cervejas Ordenadas</button>
+        <button id="botaoEmbaralhar">Embaralhar Cervejas</button>
+    </div>
+
+    <div id="meuAmor">
+    </div>
+   
+    <script>
+        let cervejas = ["Guinness", "Desperados", "Becks", "Heineken", "Corona", "Stella Artois"];
+        let cervejasAtuais = [...cervejas];
+
+        function criarTabelaCervejas(arrayDeCervejas) {
+            let tabelaHtml = '<table><thead><tr><th>Nome da Cerveja</th></tr></thead><tbody>';
+            arrayDeCervejas.forEach(cerveja => {
+                tabelaHtml += `<tr><td>${cerveja}</td></tr>`;
+            });
+            tabelaHtml += '</tbody></table>';
+            return tabelaHtml;
+        }
+
+        function exibirCervejas() {
+            let div = document.getElementById("meuAmor");
+            div.innerHTML = criarTabelaCervejas(cervejasAtuais);
+        }
+
+        let botaoCarregar = document.getElementById("botaoCarregar");
+        botaoCarregar.addEventListener("click", exibirCervejas);
+
+        let botaoOrdenar = document.getElementById("botaoOrdenar");
+        botaoOrdenar.addEventListener("click", () => {
+            cervejasAtuais.sort(); 
+            exibirCervejas();
+        });
+
+        let botaoEmbaralhar = document.getElementById("botaoEmbaralhar");
+        botaoEmbaralhar.addEventListener("click", () => {
+            for (let i = cervejasAtuais.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cervejasAtuais[i], cervejasAtuais[j]] = [cervejasAtuais[j], cervejasAtuais[i]];
+            }
+            exibirCervejas();
+        });
+    </script>
+</body>   
+</html>

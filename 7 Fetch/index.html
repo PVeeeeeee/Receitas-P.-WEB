@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch com Tabela</title>
+    <link rel="stylesheet" href="estilo6.css">
+</head>
+<body>
+    <button id="botaoCarregar">Carregar Dados</button>
+    <div id="minhaTabelaDeCervejas">Clique no botão para carregar dados.</div>
+</body>
+
+<script type="module">
+    import { montarTabelaGenerica } from './tabelaGenerica.js';
+
+    const botao = document.getElementById("botaoCarregar");
+    botao.addEventListener("click", async () => {
+       const resposta = await fetch("https://jsonplaceholder.typicode.com/users");
+        const dados = await resposta.json();
+
+        montarTabelaGenerica(
+        dados,
+        ["Nome", "Email", "Cidade"],
+        ["name", "email", "address.city"],
+        "minhaTabelaDeCervejas"
+        );
+
+            });
+</script>
+</html>

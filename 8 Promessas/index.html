@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fetch com Promise then/catch</title>
+  <link rel="stylesheet" href="estilo8.css">
+</head>
+<body>
+  <button id="btnCarregar">Carregar Bancos</button>
+  <div id="resultado">Clique no botão para carregar os dados.</div>
+
+  <script src="funcoes.js"></script>
+  <script>
+    const btn = document.getElementById("btnCarregar");
+    btn.addEventListener("click", () => {
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Erro na resposta da API");
+          }
+          return response.json();
+        })
+        .then(data => {
+          montarTabela(
+            data,
+            ["Nome", "Email", "Cidade"],
+            ["name", "email", "address.city"],
+            "resultado"
+          );
+        })
+        .catch(error => {
+          document.getElementById("resultado").innerHTML = `<p style="color:red;">Erro: ${error.message}</p>`;
+        });
+    });
+  </script>
+</body>
+</html>
